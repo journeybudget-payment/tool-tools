@@ -37,15 +37,6 @@ const DEFAULTS = {
   maxRetries: 3,
 };
 
-const DEFAULTS = {
-  baseUrl: 'https://www.pinjamtok.asia',
-  dialCode: '60',
-  concurrency: 2,
-  delayMs: 400,
-  jitterMs: 200,
-  maxRetries: 3,
-};
-
 function buildConfig(args) {
   let cfg = null;
   try {
