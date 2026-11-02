@@ -1,30 +1,22 @@
 {
-  "rcash": {
-    "base": "https://api.kwwapi.com/api",
-    "login": "/users/customer/login/",
-    "login_fields": ["phone_number", "password"],
-    "request_otp": "/users/customer/request-otp/",
-    "reset": "/users/customer/reset-password/",
-    "reset_fields": ["phone_number", "otp_code", "new_password"],
-    "otp_purpose": "password_reset",
-    "endpoints_data": [
-      "/users/customer/profile/",
-      "/users/customer/dashboard/",
-      "/loans/",
-      "/banks/customer-payment/history/"
-    ],
-    "success_keys": ["access_token", "token"],
-    "pin_length": null
-  },
-  "pinjamtok": {
-    "base": "https://www.pinjamtok.asia/api",
-    "login": "/auth/mobile-login",
-    "login_fields": ["mobile", "pin"],
-    "register": "/auth/mobile-register",
-    "reset": "/auth/reset-password",
-    "reset_fields": ["mobile", "pin"],
-    "endpoints_data": [],
-    "success_keys": ["token", "access_token", "accessToken", "jwt"],
-    "pin_length": 6
-  }
+  "baseUrl": "https://www.pinjamtok.asia",
+  "dialCode": "60",
+  "mobileNo": "123456789",
+  "advCode": null,
+  "referralCode": null,
+  "encrypt": false,
+  "concurrency": 1,
+  "delayMs": 250,
+  "jitterMs": 150,
+  "timeoutMs": 20000,
+  "maxRetries": 4,
+  "throttleBaseMs": 3000,
+  "throttleMaxMs": 120000,
+  "throttleMaxStreak": 8,
+  "start": "000000",
+  "end": "999999",
+  "shuffle": false,
+  "stopOnUnknown": false,
+  "progressEvery": 25,
+  "userAgent": "Mozilla/5.0 (Linux; Android 14; Pixel 8) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Mobile Safari/537.36"
 }
