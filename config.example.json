@@ -1,0 +1,30 @@
+{
+  "rcash": {
+    "base": "https://api.kwwapi.com/api",
+    "login": "/users/customer/login/",
+    "login_fields": ["phone_number", "password"],
+    "request_otp": "/users/customer/request-otp/",
+    "reset": "/users/customer/reset-password/",
+    "reset_fields": ["phone_number", "otp_code", "new_password"],
+    "otp_purpose": "password_reset",
+    "endpoints_data": [
+      "/users/customer/profile/",
+      "/users/customer/dashboard/",
+      "/loans/",
+      "/banks/customer-payment/history/"
+    ],
+    "success_keys": ["access_token", "token"],
+    "pin_length": null
+  },
+  "pinjamtok": {
+    "base": "https://www.pinjamtok.asia/api",
+    "login": "/auth/mobile-login",
+    "login_fields": ["mobile", "pin"],
+    "register": "/auth/mobile-register",
+    "reset": "/auth/reset-password",
+    "reset_fields": ["mobile", "pin"],
+    "endpoints_data": [],
+    "success_keys": ["token", "access_token", "accessToken", "jwt"],
+    "pin_length": 6
+  }
+}
