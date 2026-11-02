@@ -28,13 +28,41 @@ function parseArgs(argv) {
   return out;
 }
 
+const DEFAULTS = {
+  baseUrl: 'https://www.pinjamtok.asia',
+  dialCode: '60',
+  concurrency: 2,
+  delayMs: 400,
+  jitterMs: 200,
+  maxRetries: 3,
+};
+
+const DEFAULTS = {
+  baseUrl: 'https://www.pinjamtok.asia',
+  dialCode: '60',
+  concurrency: 2,
+  delayMs: 400,
+  jitterMs: 200,
+  maxRetries: 3,
+};
+
 function buildConfig(args) {
-  let cfg = loadJson(CONFIG_PATH, null);
+  let cfg = null;
+  try {
+    cfg = JSON.parse(readFileSync(CONFIG_PATH, 'utf8'));
+  } catch (err) {
+    if (err.code !== 'ENOENT') {
+      throw new Error(`config.json rosak: ${err.message}`);
+    }
+  }
   if (!cfg) {
     cfg = loadJson('config.example.json', null);
     if (!cfg) throw new Error('config.json / config.example.json tidak dijumpai');
-    log.info('config.json tiada — guna config.example.json sebagai asas');
+    log.warn('config.json tiada — guna config.example.json sebagai asas');
   }
+
+  cfg = { ...DEFAULTS, ...cfg };
+
   if (args.phone) cfg.mobileNo = args.phone;
   if (args.mobile) cfg.mobileNo = args.mobile;
   if (args['dial-code']) cfg.dialCode = args['dial-code'];
@@ -50,6 +78,11 @@ function buildConfig(args) {
   if (args.encrypt) cfg.encrypt = true;
   if (args.shuffle) cfg.shuffle = true;
   if (args['stop-on-unknown']) cfg.stopOnUnknown = true;
+
+  const base = String(cfg.baseUrl || cfg.baseURL || '').trim();
+  if (!base) throw new Error('baseUrl kosong — isi dalam config.json');
+  cfg.baseUrl = (/^https?:\/\//i.test(base) ? base : `https://${base}`).replace(/\/+$/, '');
+
   return cfg;
 }
 
@@ -164,3 +197,13 @@ main().catch((err) => {
   log.error(err.message);
   process.exit(1);
 });
+
+
+const DEFAULTS = {
+  baseUrl: 'https://www.pinjamtok.asia',
+  dialCode: '60',
+  concurrency: 2,
+  delayMs: 400,
+  jitterMs: 200,
+  maxRetries: 3,
+};
