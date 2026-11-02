@@ -1,0 +1,13 @@
+{
+  "name": "pinjamtok-pin-cracker",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Brute-force PIN 6 digit akaun pinjamtok.asia (aliran /api/auth/mobile-login)",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "start": "node src/index.js",
+    "check": "node src/index.js --check-only",
+    "resume": "node src/index.js --resume"
+  }
+}
